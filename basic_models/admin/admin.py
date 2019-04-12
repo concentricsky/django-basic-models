@@ -31,10 +31,16 @@ class AutoGroupMeta(ModelAdmin):
         return ModelForm
 
     def get_readonly_fields(self, request, obj=None):
-        readonly_fields = ['created_by', 'updated_by',
-                           'created_at', 'updated_at']
+        readonly_fields = list(getattr(self, 'readonly_fields', []))
+        if obj:
+            readonly_fields += ['created_by', 'updated_by',
+                                'created_at', 'updated_at']
 
-        return filter(lambda field: hasattr(obj, field), readonly_fields)
+            fields_which_exist = filter(lambda field: hasattr(obj, field),
+                                        readonly_fields)
+            return fields_which_exist
+        else:
+            return readonly_fields
 
     def get_fieldsets(self, request, obj=None):
         fieldsets = super(AutoGroupMeta, self).get_fieldsets(request, obj)
