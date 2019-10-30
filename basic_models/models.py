@@ -19,7 +19,7 @@ class NameSlug(NaturalKey, models.Model):
     name = models.CharField(max_length=255)
     slug = AutoSlugField(unique=True, populate_from='name')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:
@@ -57,7 +57,7 @@ class TitleBody(models.Model):
     title = models.CharField(max_length=255)
     body = models.TextField()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     class Meta:
