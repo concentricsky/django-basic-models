@@ -16,12 +16,11 @@ from setuptools import setup, find_packages
 import os
 
 # execute this file to get VERSION in the local namespace, but dont import the module
-execfile(os.path.join(os.path.dirname(__file__), 'basic_models/version.py'))
-
+exec(compile(open(os.path.join(os.path.dirname(__file__), 'basic_models/version.py'), "rb").read(), os.path.join(os.path.dirname(__file__), 'basic_models/version.py'), 'exec'))
 
 def find_package_data(**packages):
     package_data = {}
-    for package_directory,top_dirs in packages.items():
+    for package_directory,top_dirs in list(packages.items()):
         outfiles = []
         package_data[package_directory] = []
         for top_dir in top_dirs:

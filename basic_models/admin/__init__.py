@@ -14,9 +14,9 @@ class site(object):
     @staticmethod
     def register(model, admin_class):
         def _list_has_all_values(superset, subset):
-            return all(map(lambda value: value in superset, subset))
+            return all([value in superset for value in subset])
 
-        field_names = map(lambda field: field.name, model._meta.fields)
+        field_names = [field.name for field in model._meta.fields]
 
         if _list_has_all_values(field_names, ('created_by', 'updated_by')):
             site.add_base(admin_class, CreatedUpdatedBy)
