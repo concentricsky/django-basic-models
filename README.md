@@ -32,7 +32,7 @@ admin.py
     from basic_models.admin import site
 
     class MyModelAdmin(actions.Clone):
-        list_display = ('__unicode__', 'is_active')
+        list_display = ('__str__', 'is_active')
 
     site.register(MyModel, MyModelAdmin)
 
